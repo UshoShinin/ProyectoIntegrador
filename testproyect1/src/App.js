@@ -14,7 +14,7 @@ class App extends Component{
 
 
   consultarApi = () =>{
-    const url = `http://localhost:3001/login/${this.state.termino}`;
+    const url = `http://localhost:3001/${this.state.termino}`;
     console.log(url);
     fetch(url,{
       method:'GET',
@@ -22,6 +22,24 @@ class App extends Component{
         'Content-Type':'application/json',
         'Accept': 'application/json'
       }
+    })
+      .then(respuesta => respuesta.text())
+      .then(resultado =>console.log(resultado))
+  }
+
+  logearse = () =>{
+    const url = `http://localhost:3001/login`;
+    console.log(url);
+    fetch(url,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Accept': 'application/json'
+      },
+      body:JSON.stringify({
+        usuario:this.state.userName,
+        contraseña:this.state.pass
+      })
     })
       .then(respuesta => respuesta.text())
       .then(resultado =>console.log(resultado))
@@ -39,6 +57,8 @@ class App extends Component{
     this.setState({
       userName:loginState.userName,
       pass:loginState.pass
+    },()=>{
+      this.logearse();
     })
   }
 

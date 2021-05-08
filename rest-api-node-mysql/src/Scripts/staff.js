@@ -26,16 +26,6 @@ router.get('/:id',(req,res)=>{
     
 });
 
-router.get('/rou',(req,res)=>{
-    mysqlConecttion.query('SELECT * FROM staff', (err, rows, fields)=>{
-        if(!err){
-            res.json(rows);
-        } else{
-            console.log(err);
-        }
-    });
-});
-
 router.post('/',(req,res)=>{
     const {id,nombre,nombre_usuario,contraseña} = req.body;
     const query = `
